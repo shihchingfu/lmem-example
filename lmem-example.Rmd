@@ -1,0 +1,39 @@
+---
+title: "Linear Mixed Effect Model Example"
+author: "Shih Ching Fu"
+date: "29/01/2021"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(lmerTest)
+```
+
+
+```{r}
+n <- 10
+N <- 100
+
+mu <- rnorm(n = N, mean = 5, sd = 25)
+
+x1 <- rnorm(n = N, mean = mu, sd = 10)
+x2 <- rnorm(n = N, mean = mu, sd = 20)
+x3 <- rnorm(n = N, mean = mu, sd = 30)
+t <- 1:N
+
+y <- x1 + x2 + x3 + t
+
+```
+
+```{r}
+plot(y)
+```
+
+
+
+
+```{r}
+lmm_fit <- lmer(y ~ x1 + x2 + x3 + t + (1 + t|id), data = tidy_data)
+```
+
